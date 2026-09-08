@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/proposed/architecture/2026-08-29-gongchuang-alpha-single-runtime-migration.md
+2026-08-29-gongchuang-alpha-single-runtime-migration.md: 98e1bd1d6ba0fdd88455f71247ca65e9edf4e519
+2026-08-29-gongchuang-alpha-single-runtime-migration.zh.md: 795238199fbfd7e29ae1a261dc9c5f3c152aea07

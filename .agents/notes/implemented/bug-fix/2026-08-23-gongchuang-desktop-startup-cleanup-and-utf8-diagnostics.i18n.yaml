@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/bug-fix/2026-08-23-gongchuang-desktop-startup-cleanup-and-utf8-diagnostics.md
+2026-08-23-gongchuang-desktop-startup-cleanup-and-utf8-diagnostics.md: 617eeb2d62baa17a3981a3a6d2d91f77ea41b4db
+2026-08-23-gongchuang-desktop-startup-cleanup-and-utf8-diagnostics.zh.md: e4ccee95d8e70fa228b4e05909893303060b1faa

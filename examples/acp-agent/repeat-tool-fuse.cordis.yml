@@ -1,0 +1,14 @@
+# Exact-repeat fuse scenario overlay. It preserves the ordinary example
+# composition and enables the Gongchuang deployment thresholds for this
+# scenario so the third identical call is denied before dispatch.
+- id: base
+  name: '@deepseek-ai/cordis-plugin-include'
+  config:
+    path: ./cordis.yml
+    patches:
+      - id: repeat-tool-reminder
+        name: '@deepseek-ai/dsh-repeat-tool-reminder'
+        config:
+          thresholds: [2, 3, 5]
+          blockAt: 3
+          argumentsPreviewChars: 300

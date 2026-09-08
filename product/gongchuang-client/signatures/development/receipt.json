@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "manifest": "policy-template.json",
+  "manifestSha256": "beb4e7c8770c00df022ba967a287009301930c5a80b02719e56ac519dde0f8bc",
+  "publicKeySha256": "e66d5e74faa29052963259b721365ce40500f2395a92e2f078865a48748f5ef1",
+  "signatureAlgorithm": "Ed25519",
+  "signingTier": "external"
+}

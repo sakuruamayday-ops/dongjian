@@ -1,0 +1,277 @@
+{
+  "name": "@gongchuang/desktop",
+  "description": "洞见 desktop host for Windows and macOS",
+  "version": "0.1.0",
+  "author": "Dongjian",
+  "private": true,
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "postinstall": "install-electron",
+    "build:workspace-runtime": "pnpm -w exec tsc -b --force tsconfig.host.json && pnpm -w exec tsdown --env.DSH_BUILD_FACE host && pnpm -w exec tsc -b --force tsconfig.client.json && pnpm -w exec tsdown --env.DSH_BUILD_FACE client --env.DSH_CLIENT_TITLE 洞见",
+    "build:web": "pnpm --filter @deepseek-ai/dsh-web-frontend run build",
+    "build": "pnpm run build:workspace-runtime && pnpm run build:web && tsc -b --force && pnpm --filter @deepseek-ai/dsh exec tsdown && tsdown",
+    "dev": "pnpm run build && electron dist/main.js",
+    "acceptance:mac": "bash scripts/macos-device-acceptance.sh",
+    "acceptance:mac-update": "tsx scripts/packaged-macos-update-acceptance.ts",
+    "acceptance:windows": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/windows-device-acceptance.ps1",
+    "verify:upstreams": "tsx scripts/audit-product-upstreams.ts",
+    "verify:inputs:mac": "pnpm run verify:upstreams && tsx scripts/verify-packaging-inputs.ts --platform darwin --arch arm64",
+    "verify:inputs:mac-intel": "pnpm run verify:upstreams && tsx scripts/verify-packaging-inputs.ts --platform darwin --arch x64",
+    "verify:inputs:win": "pnpm run verify:upstreams && tsx scripts/verify-packaging-inputs.ts --platform win32 --arch x64",
+    "package:dir": "pnpm run package:dir:mac",
+    "package:dir:mac": "pnpm run verify:inputs:mac && pnpm run build && electron-builder --dir --mac --arm64",
+    "package:dir:mac-intel": "pnpm run verify:inputs:mac-intel && pnpm run build && electron-builder --dir --mac --x64",
+    "package:dir:win": "pnpm run verify:inputs:win && pnpm run build && electron-builder --config electron-builder.windows.cjs --dir --win --x64",
+    "dist:mac": "pnpm run verify:inputs:mac && pnpm run build && electron-builder --mac dmg zip --arm64 && pnpm run updates:metadata:mac",
+    "dist:mac-intel": "pnpm run verify:inputs:mac-intel && pnpm run build && electron-builder --mac dmg zip --x64 && pnpm run updates:metadata:mac-intel",
+    "dist:mac-transition": "pnpm run build && electron-builder --config electron-builder.transition.cjs --mac zip --arm64 --x64",
+    "dist:win": "pnpm run verify:inputs:win && pnpm run build && electron-builder --config electron-builder.windows.cjs --win nsis zip --x64 && pnpm run updates:metadata:win",
+    "updates:metadata:mac": "tsx scripts/build-update-metadata.ts --platform darwin --release-dir release",
+    "updates:metadata:mac-intel": "tsx scripts/build-update-metadata.ts --platform darwin --arch x64 --release-dir release",
+    "updates:metadata:win": "tsx scripts/build-update-metadata.ts --platform win32 --arch x64 --release-dir release",
+    "build:skill-update": "tsx scripts/build-skill-update-package.ts",
+    "stage:skills": "tsx ../../product/gongchuang-client/scripts/stage-skill-suite.ts",
+    "stage:runtime": "tsx ../../product/gongchuang-client/scripts/stage-product-runtime.ts"
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "workspace:^",
+    "@deepseek-ai/cordis-plugin-group": "workspace:^",
+    "@deepseek-ai/cordis-plugin-loader": "workspace:^",
+    "@deepseek-ai/dsh": "workspace:^",
+    "@deepseek-ai/dsh-anonymous-user-id": "workspace:^",
+    "@deepseek-ai/dsh-atomic-write": "workspace:^",
+    "@deepseek-ai/dsh-attachment": "workspace:^",
+    "@deepseek-ai/dsh-authorization": "workspace:^",
+    "@deepseek-ai/dsh-bash-local": "workspace:^",
+    "@deepseek-ai/dsh-brand": "workspace:^",
+    "@deepseek-ai/dsh-code-runtime": "workspace:^",
+    "@deepseek-ai/dsh-compaction": "workspace:^",
+    "@deepseek-ai/dsh-client-connection": "workspace:^",
+    "@deepseek-ai/dsh-fs": "workspace:^",
+    "@deepseek-ai/dsh-credentials": "workspace:^",
+    "@deepseek-ai/dsh-hook-protocol": "workspace:^",
+    "@deepseek-ai/dsh-host-directory-picker-browse": "workspace:^",
+    "@deepseek-ai/dsh-host-webserver": "workspace:^",
+    "@deepseek-ai/dsh-invariants": "workspace:^",
+    "@deepseek-ai/dsh-jobs": "workspace:^",
+    "@deepseek-ai/dsh-launch-environment": "workspace:^",
+    "@deepseek-ai/dsh-output-retention": "workspace:^",
+    "@deepseek-ai/dsh-sandbox": "workspace:^",
+    "@deepseek-ai/dsh-sdk-protocol": "workspace:^",
+    "@deepseek-ai/dsh-scope": "workspace:^",
+    "@deepseek-ai/dsh-session-persistence": "workspace:^",
+    "@deepseek-ai/dsh-session-query": "workspace:^",
+    "@deepseek-ai/dsh-session-telemetry": "workspace:^",
+    "@deepseek-ai/dsh-session-title-llm": "workspace:^",
+    "@deepseek-ai/dsh-settings": "workspace:^",
+    "@deepseek-ai/dsh-shell": "workspace:^",
+    "@deepseek-ai/dsh-spill": "workspace:^",
+    "@deepseek-ai/dsh-subagent-in-process-driver": "workspace:^",
+    "@deepseek-ai/dsh-subprocess": "workspace:^",
+    "@deepseek-ai/dsh-timeout": "workspace:^",
+    "@deepseek-ai/dsh-tool-fs-search": "workspace:^",
+    "@deepseek-ai/dsh-util-time": "workspace:^",
+    "@deepseek-ai/dsh-util-workspace-path": "workspace:^",
+    "@deepseek-ai/dsh-workflow": "workspace:^",
+    "@deepseek-ai/dsh-web-fetch-http": "workspace:^",
+    "@gongchuang/client-ui": "workspace:^",
+    "@deepseek-ai/dsh-client-ui-directory-picker-browse": "workspace:^",
+    "@gongchuang/credentials-keychain": "workspace:^",
+    "@gongchuang/connectors": "workspace:^",
+    "@gongchuang/skill-marketplace": "workspace:^",
+    "@gongchuang/local-automation": "workspace:^",
+    "@gongchuang/graph-memory": "workspace:^",
+    "@gongchuang/account": "workspace:^",
+    "@gongchuang/model-connections": "workspace:^",
+    "@gongchuang/client-policy-gate": "workspace:^",
+    "@gongchuang/user-errors": "workspace:^",
+    "@gongchuang/signed-skill-runtime": "workspace:^",
+    "electron-log": "5.4.4",
+    "electron-updater": "6.8.9",
+    "koffi": "3.1.1",
+    "docx": "9.7.1",
+    "unzipper": "0.12.5",
+    "word-extractor": "1.0.4"
+  },
+  "devDependencies": {
+    "@electron/asar": "3.4.1",
+    "electron": "43.4.0",
+    "electron-builder": "26.15.3",
+    "fflate": "0.8.3",
+    "playwright": "^1.49.0",
+    "tsdown": "^0.22.2",
+    "typescript": "^6.0.3"
+  },
+  "optionalDependencies": {
+    "@img/sharp-darwin-arm64": "0.35.3",
+    "@img/sharp-darwin-x64": "0.35.3",
+    "@img/sharp-libvips-darwin-arm64": "1.3.2",
+    "@img/sharp-libvips-darwin-x64": "1.3.2",
+    "@koromix/koffi-win32-x64": "3.1.1",
+    "@napi-rs/canvas-win32-x64-msvc": "1.0.6",
+    "@vscode/ripgrep-darwin-arm64": "1.18.0",
+    "@vscode/ripgrep-darwin-x64": "1.18.0",
+    "@koromix/koffi-darwin-arm64": "3.1.1",
+    "@koromix/koffi-darwin-x64": "3.1.1",
+    "@vscode/ripgrep-win32-x64": "1.18.0",
+    "node-addon-require-builtin-win32-x64-msvc": "0.1.4"
+  },
+  "build": {
+    "beforeBuild": "scripts/prepare-native-modules-for-packaging.mjs",
+    "afterPack": "scripts/verify-packaged-application.mjs",
+    "afterSign": "scripts/verify-signed-macos-application.mjs",
+    "appId": "cn.dongjian.desktop",
+    "productName": "洞见",
+    "protocols": [
+      {
+        "name": "洞见对话链接",
+        "schemes": ["dongjian"]
+      }
+    ],
+    "artifactName": "Dongjian-${version}-${os}-${arch}.${ext}",
+    "npmRebuild": true,
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node",
+      "**/*.exe",
+      "**/bin/rg",
+      "!**/node-pty/third_party/conpty/**/win10-arm64/**",
+      "!release*/**",
+      "!*.previous-*/**"
+    ],
+    "files": [
+      "dist/**",
+      "package.json",
+      "!release*/**",
+      "!output/**",
+      "!**/output/**",
+      "!**/coverage/**",
+      "!**/*.map",
+      "!**/*.tsbuildinfo",
+      "!*.previous-*/**"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "product/brand",
+        "filter": ["**/*", "!brand-mark.png", "!app-icon-white.png"]
+      },
+      {
+        "from": ".build/product-skills",
+        "to": "product/skill-suite"
+      },
+      {
+        "from": ".build/product-runtime-${os}-${arch}",
+        "to": "product/runtime"
+      },
+      {
+        "from": "../../product/gongchuang-client/policy-template.json",
+        "to": "product/policy/policy-template.json"
+      },
+      {
+        "from": "../../product/gongchuang-client/signatures/development/policy.sig",
+        "to": "product/policy/policy.sig"
+      },
+      {
+        "from": "../../product/gongchuang-client/signatures/development/policy.pub.pem",
+        "to": "product/policy/policy.pub.pem"
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "publish": [],
+    "mac": {
+      "identity": "-",
+      "forceCodeSigning": true,
+      "signIgnore": [
+        "/Contents/Resources/product/runtime/files/",
+        "/Contents/Resources/product/credentials/gongchuang-credential-broker$"
+      ],
+      "extraResources": [
+        {
+          "from": "native-credentials/mac-${arch}/gongchuang-credential-broker",
+          "to": "product/credentials/gongchuang-credential-broker"
+        },
+        {
+          "from": "native-credentials/manifest.json",
+          "to": "product/credentials/manifest.json"
+        }
+      ],
+      "icon": "build/icon-dongjian.icns",
+      "category": "public.app-category.business",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "notarize": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "files": [
+        "dist/**",
+        "package.json",
+        "!.build/**",
+        "!release*/**",
+        "!output/**",
+        "!**/output/**",
+        "!**/coverage/**",
+        "!**/*.map",
+        "!**/*.tsbuildinfo",
+        "!**/node_modules/@napi-rs/canvas-{win32-*,linux-*}/**",
+        "!**/node_modules/@img/{sharp,sharp-libvips}-{win32-*,linux-*}/**",
+        "!**/node_modules/@koromix/koffi-{win32-*,linux-*}/**",
+        "!**/node_modules/@vscode/ripgrep-{win32-*,linux-*}/**",
+        "!**/node_modules/node-addon-require-builtin-{win32-*,linux-*}/**",
+        "!**/node_modules/node-pty/prebuilds/{win32-*,linux-*}/**"
+      ],
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "title": "洞见 V${version}"
+    },
+    "win": {
+      "icon": "build/icon-dongjian.ico",
+      "executableName": "Dongjian",
+      "electronLanguages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "files": [
+        "dist/**",
+        "package.json",
+        "!.build/**",
+        "!release*/**",
+        "!output/**",
+        "!**/output/**",
+        "!**/coverage/**",
+        "!**/*.map",
+        "!**/*.tsbuildinfo",
+        "!**/node_modules/@napi-rs/canvas-{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/@img/{sharp,sharp-libvips}-{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/@koromix/koffi-{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/@vscode/ripgrep-{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/node-addon-require-builtin-{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/node-pty/build/**",
+        "!**/node_modules/node-pty/prebuilds/{darwin-*,win32-arm64*,linux-*}/**",
+        "!**/node_modules/node-pty/third_party/conpty/**/win10-arm64/**"
+      ],
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "signAndEditExecutable": true
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "洞见",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

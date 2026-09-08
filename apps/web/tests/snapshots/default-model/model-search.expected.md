@@ -1,0 +1,11 @@
+- menu "模型与推理等级":
+  - img
+  - searchbox "搜索模型": Acme
+  - group "Acme Gateway":
+    - menuitem "收起 Acme Gateway" [expanded]:
+      - text: Acme Gateway
+      - img
+    - menuitemradio "Acme Large"
+  - menuitem "刷新模型":
+    - img
+    - text: 刷新模型

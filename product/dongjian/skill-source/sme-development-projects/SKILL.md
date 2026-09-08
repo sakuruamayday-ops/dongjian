@@ -1,0 +1,107 @@
+---
+name: sme-development-projects
+description: 分析创新型中小企业、专精特新中小企业、专精特新小巨人及相关培育项目。用户提及专精特新、小巨人、补短板、填空白、企业简介或主导产品产业链归属时使用。
+---
+
+# 中小企业培育项目
+
+
+## 客户端运行环境
+
+本技能由客户端整包验签后加载，不执行其他宿主的独立安装、准备或二次验签流程。不得因客户端未携带独立安装清单而反复查找、安装或重试。
+
+工具以本轮工具目录为准。若只开放 run_code，提供 description 与 code，在 code 内通过 await tools.skill、await tools.read、await tools.write、await tools.bash 等当前 SDK 绑定调用，不把 skill、read、write、edit、apply_patch 或 bash 当根工具。run_code 不是 Node.js：不可使用 require、process 或 fs；文件和进程操作使用 SDK 中的工具。读取文件固定调用 tools.read({ file_path: "..." })，不得把参数名写成 path。所有调用必须在 code 顶层实际 await，不得只定义未调用的包装函数。
+
+run_code 只返回 null 或由字符串、数字、布尔值、数组和普通对象组成的纯 JSON；不得返回原始工具结果、Promise、undefined 或其他不可无损序列化的值。需要继续使用工具结果时在同一段 code 内完成处理，只返回后续决策必需的字段。
+
+SDK 工具没有业务参数时也传入空对象 {}，不省略参数，不传 undefined。
+
+用户限定读取指定文件或目录时，该范围优先于学习已有格式、复用历史案例和工作区探索。不读取其他会话成果或相邻项目来补齐答案，也不先扫描整个工作区。用户已经给出精确输入或输出路径时直接使用该路径；即使 SDK 提供 glob，也不得用 pwd、glob、find、ls 或目录枚举重新发现。来源未给出的字段保持未知；采集和写入时间由运行进程读取系统时钟，不复制示例日期。
+
+技能说明中出现脚本名或命令，表示应按文档直接执行该命令，不表示可以先读取脚本源码。首次执行前不得读取 `scripts/**`、`examples/**`、`tests/**`、`*.example.*`、`package.json`，也不得列出技能目录来理解用法；只有文档给出的命令已经真实失败，且错误信息仍不足以确定调用契约时，才可定向读取与该失败直接相关的一个源码文件。此限制避免把生成任务退化为源码研读，也避免示例值污染用户事实。
+
+技能文档已经给出连续的确定性命令时，在一个 run_code 中按依赖顺序连续执行相邻的输入校验、生成、导出和成品检查；除非前一步结果会改变下一步参数，不得每成功一条命令就返回模型重新规划。
+
+客户端生成 PDF 时，统一使用宿主提供的 gongchuang_render_pdf：先按宿主要求对真实 HTML 源完成对话内预校验，再调用该工具。即使技能业务说明列有独立渲染脚本，也不得在客户端运行 render_pdf_stdout.js、直接启动 Chrome 或 Edge、查找或安装 Playwright 或 Chromium；这些独立渲染入口仅供未提供 gongchuang_render_pdf 的其他宿主。
+
+调用可能持续运行的外部命令时，必须显式传入宿主支持的 timeoutMs，并保留真实退出状态。命令超时或失败后不得改成无超时后台运行，也不得用管道吞掉退出码。
+
+
+用户只问专精特新或小巨人的一个条件、一个产品定位、一个专利方向或一段文本时，只处理该问题，不自动进入完整体检、四项判断全表、项目路径或报告。只有明确要求专精特新或小巨人申请书审核、后期体检、培育报告或完整项目分析时，才执行对应完整流程。
+
+## 项目与版本闸门
+
+1. 先确认创新型中小企业、专精特新中小企业、专精特新“小巨人”或地方培育项目，再确认地区、申报年度、批次和新申报或复核。
+2. 读取 `references/application-version-gate.md`。申请书版本识别失败、同时命中多个版本或用户确认版本与材料不一致时立即停止，不评分、不形成达标结论、不撰写正式正文。
+3. 任何专精特新或小巨人任务必须读取 `references/current-policy-baseline-2026.md`，并重新核验当期通知。活动技能只保留 2026 政策分支，不运行历史四维评分或内部百分制。2026 年度小巨人复核按 2026 当期通知明确的过渡要求把握；该例外仅适用于通知指定的复核对象和期间，不能扩展到新申报或未来年度。
+
+## 前期培育报告方向卡门禁
+
+任务属于前期培育报告、产品方向选择或未来专利培育时，先完整读取 `references/direction-card-first-template.md` 和 `references/policy-application-path-contract.md`。先分别形成企业现有方向、用户给定方向和建议新增方向三类方向卡，每张卡直接写方向内容、好处、坏处、培育建议、专利布局和申报角色；完成横向比较与推荐后，再形成与企业相关的完整政策项目池，最后进入政策适配和申报成熟度。
+
+方向卡阶段有资料就分析，没有就跳过，不因缺少第三方证据阻断方向判断。共享算法或底层能力不等于同一主导产品，不得用抽象“技术母体”把客户、交付物、收入边界或产业环节明显不同的方向硬合并。生成 Word 报告时复制 `assets/专精特新小巨人前期培育方向卡模板.docx` 到任务输出目录后填写，禁止直接改写技能内母版。
+
+## 前期评估政策路径闸门
+
+前期培育报告不得只列直接服务小巨人硬门槛的项目。必须按路径合同逐类检查主目标梯度、研发平台、绿色发展、数字化、知识产权、质量品牌和产业化方向，并在正文保留当前可报、建设后申报、条件触发和长期梯度。
+
+企业尚无研发中心、绿色工厂或数字化车间时，结论可以是建设后申报或条件触发，但必须写清先行建设、梯度依赖、建议年度、典型流程、核心材料、关键门槛、停项条件、责任人和最晚节点。优先级低、不是小巨人硬门槛或企业暂时不需要，均不是删除路径的理由。
+
+目标年度通知未发布时，使用现行办法和最近已核验通知作为规划参考，标明政策基准年度并设置当期重检节点，不复制历史截止日、奖补金额或年度特有门槛。
+
+## 评价流程
+
+4. 前期培育报告先完成方向卡和方向选择，再按 `references/evaluation-workflow.md` 依次核验直通条件、排除项、硬门槛和评价指标，区分已核验事实、计算结果、企业自述、缺失和冲突。命中历史评分表、旧培训材料或历史申请书时标记为历史档案并退出当前评价链，不提取旧条件、不计算旧分数。
+5. 核验专业化、精细化、特色化、创新能力、财务、知识产权和产业链要求。某企业入选只证明其在对应年度、地区和批次通过评审，不能反推其满足全部评分项；不同年度、地区和政策口径的企业不得直接横向排名。
+
+核验营收、利润、研发费用、资产负债率和增长率时，先读取同一企业的 `enterprise-financial-facts/v1` 共享事实，经 `financial-verification` 校验后复用。税务风险提示不自动转为专精特新或小巨人不达标结论。
+
+涉及产业链或“工业六基”时，必须调用 `industry-chain-foundation-matcher`，严格使用其目录索引和精确、近似、未命中三级规则。没有精确命中时，输出一个相似目录项和一个推定产业链，均不得伪装成目录原文。
+
+涉及市场占有率、细分领域排名、补短板、锻长板、填空白或国产替代时，必须调用 `industry-positioning`，读取其细分市场边界与产业链价值证据闸门，并将市场边界、测算口径、替代对象和证据状态写入 `evidence-ledger`。行业标准、海关编码和协会分类只按各自适用范围交叉验证，不得代替当期申请表指定的行业或产品分类。
+
+主导产品命名、收入边界和自产自用核心技术载体分别读取 `references/main-product-naming-and-boundary-gate.md`、`references/core-formula-process-performance-matrix.md`。细分市场占有率读取 `references/market-share-workpaper-method.md`；技术先进性和工程落地性读取 `references/technology-advancement-feasibility-rubric.md`。这些方法只统一证据与计算顺序，不替代当期政策门槛。
+
+前期培育报告进入补短板、填空白和六问展开前，读取 `references/direction-card-to-six-questions.md`。每套六问只服务一个已选产品方向；专利结构、未来布局和检索交给 `patent-router`，正式正文交给 `application-writing`，不得另建并行专利或写作入口。
+
+诊断或改写企业总体情况简介时，先读取 `references/enterprise-introduction-method.md`。默认采用企业基本情况三段和主导产品及技术五段的固定结构，其中精细化管理是第四段，不得降为可选项；当期已确认的强制表单另有结构时服从该表单。逐段建立行业问题、核心技术、量化指标、验证证据和产业链价值闭环，资料不足时明确缺口，不补造管理体系、客户或技术指标。
+
+## 四项独立判断
+
+读取 `references/four-judgment-decision-table.md`，分别对主导产品、补短板、填空白和国产替代作出“保留、替换、补证后保留”结论，并单列锻长板证据。四项属于待审判断，不因申请书已经填写而自动成立；每项必须说明对象、同类环节、证据和联动修改。主导产品、四项判断、收入、客户和 I 类知识产权必须跨章节一致。
+
+本技能固定采用现实锚定的事实锁：政策、目录、企业登记和现实对标回到可核验现实资料；申请书列示的财务、经营、技术、客户、产能、指标和专利法律状态作为本轮推导事实使用。出现材料内部矛盾、计算不成立或更高等级现实来源明确冲突时，保留原填写并指出冲突，不得静默改写。主导产品与四项判断允许依据企业自述成立，但仍须通过产品边界、技术因果、同类环节和跨章节一致性审查。
+
+不得把审中专利视为有效授权成果。财务、市场份额、客户、领先地位和进口替代等信息没有可靠来源时，不推算、不补造，只列证据缺口。不得把“全球前三或国内第一”写成专精特新和小巨人的通用门槛；2026年小巨人新申请按当期申请书的占有率或排名条件执行，且不要求另行提交第三方市场占有率证明。
+
+结构化诊断只构造一次 JSON，再校验一次；不得创建探针文件、猜测枚举、运行 `--help`、列目录或预读校验脚本来试探输入格式。JSON 必须完整包含以下字段：
+
+```json
+{
+  "application_context": {
+    "project_level": "specialized-sme",
+    "region": "浙江省",
+    "year": 2026,
+    "application_type": "new",
+    "form_version": "2026",
+    "version_status": "confirmed",
+    "policy_status": "current"
+  },
+  "overall_conclusion": "conditional",
+  "four_judgments": {
+    "leading_product": {"decision": "retain", "evidence_state": "claimed", "object": "对象", "reason": "理由", "actions": ["行动"]},
+    "bottleneck": {"decision": "retain-after-evidence", "evidence_state": "missing", "object": "对象", "reason": "理由", "actions": ["行动"]},
+    "gap_filling": {"decision": "replace", "evidence_state": "conflicting", "object": "对象", "reason": "理由", "actions": ["行动"]},
+    "import_substitution": {"decision": "retain", "evidence_state": "computed", "object": "对象", "reason": "理由", "actions": ["行动"]}
+  },
+  "hard_gates": [],
+  "evaluation": {"quality_score": {"status": "pending-platform-evaluation", "value": null}},
+  "evidence_gaps": [],
+  "risks": [],
+  "actions": []
+}
+```
+
+`overall_conclusion` 只允许 `eligible`、`conditional`、`ineligible`、`undetermined`；`decision` 只允许 `retain`、`replace`、`retain-after-evidence`；`evidence_state` 只允许 `verified`、`computed`、`claimed`、`missing`、`conflicting`。平台质量分已经取得可验证来源时使用 `{"status":"verified-platform-score","value":0至100的数值,"source":"来源"}`；否则固定使用示例中的待评价对象，且总体结论不得为 `eligible`。
+
+客户端内将 JSON 写入用户指定工作区后，调用已签名操作 `sme-development-projects.validate-assessment`，参数为 `{"assessment":"<工作区内结果.json>"}`。其他宿主运行 `python3 scripts/validate_sme_assessment.py <结果.json>`。校验失败时只按返回的完整错误清单修正一次；仍失败则保留已完成内容并明确标注未通过，不得继续循环，也不得交付正式结论。

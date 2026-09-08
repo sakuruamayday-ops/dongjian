@@ -1,0 +1,46 @@
+name: Gongchuang Release Identity
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-release-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 这些测试共同消费正式版本源；任一处重新手写版本号都会在发布分支立即失败。
+      - name: Verify product release identity
+        run: >-
+          pnpm exec vitest run
+          packages/guard/gongchuang-policy-gate/tests/gongchuang-policy-gate.spec.ts
+          scripts/gongchuang-product-contract.spec.ts
+          product/gongchuang-client/tests/host-admission.spec.ts
+          apps/desktop/tests/macos-device-acceptance.spec.ts
+          apps/desktop/tests/windows-device-acceptance.spec.ts
+
+      - name: Build workspace types and verify contracts
+        # 全量工作区类型构建会超过 GitHub runner 的 Node 默认堆上限；显式扩容，避免把 OOM 误报成版本身份门禁失败。
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: npm run build:lib:host && npm run typecheck:contracts-ready

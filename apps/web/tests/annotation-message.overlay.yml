@@ -1,0 +1,6 @@
+# The actual product UI over the hermetic web scaffold. Business services that
+# are outside this interaction retain their unavailable state; no live account,
+# connector, update source, or customer workspace is contacted by the fixture.
+- insert:
+    - id: gongchuang-client-ui
+      name: '@gongchuang/client-ui'

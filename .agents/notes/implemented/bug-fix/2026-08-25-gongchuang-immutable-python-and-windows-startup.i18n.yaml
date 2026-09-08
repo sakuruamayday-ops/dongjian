@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/bug-fix/2026-08-25-gongchuang-immutable-python-and-windows-startup.md
+2026-08-25-gongchuang-immutable-python-and-windows-startup.md: f92915dc2dc45370d64bdce99baba4742e7036f9
+2026-08-25-gongchuang-immutable-python-and-windows-startup.zh.md: 42075be50fbb1ceddbdbda9c5e9973b0bdb93aa5

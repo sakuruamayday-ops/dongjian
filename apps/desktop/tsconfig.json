@@ -1,0 +1,33 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "../..",
+    "outDir": "lib/types",
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "types": ["node", "electron"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "../../product/gongchuang-client/src/host-admission.ts",
+    "../../product/gongchuang-client/src/product-version.ts",
+    "../../product/gongchuang-client/src/product-runtime-verifier.ts",
+    "../../product/gongchuang-client/src/skill-suite-policy.ts",
+    "../../product/gongchuang-client/src/skill-suite-verifier.ts",
+    "../../product/gongchuang-client/src/trust-anchors.ts"
+  ],
+  "references": [
+    { "path": "../../vendor/cordis" },
+    { "path": "../../vendor/loader" },
+    { "path": "../../vendor/include" },
+    { "path": "../../packages/client/connection/tsconfig.host.json" },
+    { "path": "../../packages/util/launch-environment" },
+    { "path": "../../packages/fs/tool-fs-search" },
+    { "path": "../../packages/host/webserver" },
+    { "path": "../../packages/product/gongchuang-signed-skill-runtime" },
+    { "path": "../../packages/product/gongchuang-user-errors" },
+    { "path": "../cli" }
+  ]
+}

@@ -1,0 +1,121 @@
+.control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--gc-border-strong);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--gc-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.trigger:hover:not(:disabled),
+.trigger:focus-visible {
+  border-color: var(--gc-gold);
+  color: var(--gc-ink);
+}
+
+.trigger[data-armed] {
+  border-color: var(--gc-gold);
+  background: color-mix(in srgb, var(--gc-gold) 12%, transparent);
+  color: var(--gc-ink);
+}
+
+.trigger:focus-visible,
+.secondary:focus-visible,
+.primary:focus-visible {
+  outline: 2px solid var(--dsw-alias-state-business-primary);
+  outline-offset: 2px;
+}
+
+.trigger:disabled {
+  color: var(--gc-disabled);
+  cursor: default;
+}
+
+.suggestion {
+  position: absolute;
+  left: 32px;
+  bottom: calc(100% - 6px);
+  z-index: 8;
+  width: min(360px, 76vw);
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+  border: 1px solid var(--gc-border-strong);
+  border-radius: 12px;
+  background: var(--gc-surface);
+  color: var(--gc-ink);
+  box-shadow: var(--gc-shadow-md);
+}
+
+.suggestion {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.suggestion > span:not(.actions) {
+  color: var(--gc-muted);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.secondary,
+.primary {
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.secondary {
+  border: 1px solid var(--gc-border-strong);
+  background: transparent;
+  color: var(--gc-muted);
+}
+
+.primary {
+  border: 1px solid var(--gc-brand);
+  background: var(--gc-brand);
+  color: var(--gc-on-brand);
+}
+
+.secondary:hover {
+  color: var(--gc-ink);
+}
+
+.primary:hover {
+  border-color: var(--gc-brand-hover);
+  background: var(--gc-brand-hover);
+}
+
+@media (max-width: 720px) {
+  .trigger span {
+    display: none;
+  }
+
+  .trigger {
+    justify-content: center;
+    width: 30px;
+    padding: 0;
+  }
+}

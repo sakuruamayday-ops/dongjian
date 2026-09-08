@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-09-03-gongchuang-numbered-annotations.md
+2026-09-03-gongchuang-numbered-annotations.md: 1fcba139f65d3a03d8f7374d97046b5948681316
+2026-09-03-gongchuang-numbered-annotations.zh.md: 26e5ee4865100100c76f406eb75c67005e3cb490

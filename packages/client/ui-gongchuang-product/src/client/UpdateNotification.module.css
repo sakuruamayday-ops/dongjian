@@ -1,0 +1,24 @@
+.notice {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 0.5px solid var(--gc-brand, var(--dsw-alias-state-error-primary));
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-layer-1);
+  color: var(--dsw-alias-label-primary);
+}
+.notice > svg { color: var(--gc-brand, var(--dsw-alias-state-error-primary)); }
+.status { display: grid; gap: 4px; min-width: 0; flex: 1; font-size: 13px; line-height: 20px; overflow-wrap: anywhere; }
+.status strong { font-weight: 500; }
+.status span { color: var(--dsw-alias-label-secondary); font-size: 12px; }
+.status progress { width: 100%; height: 4px; accent-color: var(--dsw-alias-state-error-primary); }
+.actions { grid-column: 1 / -1; display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.actions button { border: 0.5px solid var(--gc-brand, var(--dsw-alias-state-error-primary)); border-radius: 5px; padding: 6px 9px; background: transparent; color: var(--gc-brand, var(--dsw-alias-state-error-primary)); font: inherit; font-size: 12px; cursor: pointer; }
+.actions .primary { background: var(--gc-brand, var(--dsw-alias-state-error-primary)); color: var(--gc-on-brand, var(--dsw-alias-label-primary-inverted)); }
+.actions .close { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; color: var(--dsw-alias-label-secondary); }
+.actions button:disabled { opacity: .6; cursor: wait; }
+.compact { display: grid; position: relative; place-items: center; width: 40px; height: 36px; margin-inline: auto; border: 0; border-radius: 5px; background: var(--gc-brand, var(--dsw-alias-state-error-primary)); color: var(--gc-on-brand, var(--dsw-alias-label-primary-inverted)); cursor: pointer; }
+.compact span { position: absolute; top: 5px; right: 6px; width: 4px; height: 4px; border-radius: 50%; corner-shape: round; background: currentColor; }
+.notes { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; max-height: 60vh; overflow-y: auto; }

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "product": {
+    "id": "cn.dongjian.desktop",
+    "clientVersion": "0.1.0",
+    "skillBundleVersion": "0.1.0"
+  },
+  "providers": {
+    "allow": [
+      "fireworks",
+      "openrouter",
+      "anthropic",
+      "xai",
+      "deepseek-official",
+      "minimax",
+      "minimax-cn",
+      "opencode-zen",
+      "opencode-go",
+      "nvidia",
+      "ollama-cloud",
+      "lmstudio",
+      "xiaomi",
+      "arcee",
+      "gmi",
+      "azure-foundry",
+      "actual",
+      "alibaba-coding-plan",
+      "commandcode",
+      "deepinfra",
+      "gemini",
+      "huggingface",
+      "kilocode",
+      "kimi-coding",
+      "kimi-coding-cn",
+      "meta-ai",
+      "novita",
+      "openai-api",
+      "alibaba",
+      "stepfun",
+      "tencent-tokenhub",
+      "upstage",
+      "ai-gateway",
+      "zai",
+      "custom-api"
+    ]
+  },
+  "tools": {
+    "allow": [
+      "get_*",
+      "list_*",
+      "read*",
+      "grep",
+      "glob",
+      "view_image",
+      "web_search",
+      "web_fetch",
+      "skill",
+      "skill_*",
+      "ask_user_question",
+      "run_code",
+      "gongchuang_skill_operation",
+      "gongchuang_render_pdf",
+      "mcp_*",
+      "gongchuang_professional_validate",
+      "gongchuang_content_audit",
+      "gongchuang_visual_inspection",
+      "gongchuang_branding_gate",
+      "gongchuang_artifact_probe",
+      "gongchuang_publish_files",
+      "gm_status",
+      "gm_stats",
+      "gm_search",
+      "gm_record",
+      "apply_patch",
+      "write*",
+      "edit*",
+      "bash",
+      "pwsh"
+    ],
+    "ask": [
+      "computer_use",
+      "browser_*",
+      "chrome_*",
+      "gongchuang_create_automation"
+    ],
+    "deny": [
+      "delete*",
+      "remove*",
+      "format*",
+      "exec_command",
+      "shell*",
+      "terminal_*",
+      "job_*",
+      "subagent*",
+      "workflow*"
+    ],
+    "allowUnattributed": false
+  },
+  "executionBudgets": {
+    "search": {
+      "triggerAny": ["请对以下问题执行联网检索。"],
+      "defaultTier": "standard",
+      "tiers": [
+        {
+          "id": "standard",
+          "label": "普通问答档",
+          "triggerAny": [],
+          "maxSteps": 8,
+          "maxSearchCalls": 2,
+          "maxFetchCalls": 4
+        },
+        {
+          "id": "professional",
+          "label": "政策与申报专业档",
+          "triggerAny": ["政策", "项目匹配", "申报", "政策原文", "申报通知", "联网检索"],
+          "maxSteps": 20,
+          "maxSearchCalls": 6,
+          "maxFetchCalls": 8
+        },
+        {
+          "id": "high-assurance",
+          "label": "高风险业务保障档",
+          "triggerAny": ["评分", "体检", "报告", "数字身份证", "找同行", "同行", "可行性", "尽调"],
+          "maxSteps": 24,
+          "maxSearchCalls": 8,
+          "maxFetchCalls": 12
+        }
+      ]
+    }
+  },
+  "delivery": {
+    "professionalReceipt": {
+      "id": "professional-kernel",
+      "label": "专业规则、证据与计算校验",
+      "producerTools": ["gongchuang_professional_validate"]
+    },
+    "rules": [
+      {
+        "id": "formal-artifact",
+        "triggerAny": [
+          "正式申报材料",
+          "最终文件",
+          "交付文件",
+          "生成PDF",
+          "生成 Word",
+          "生成PPT",
+          "生成Excel",
+          "出报告",
+          "生成报告",
+          "报告文件",
+          "申请书文件",
+          "Word文档",
+          "Excel表格",
+          ".docx",
+          ".xlsx",
+          ".xlsm",
+          ".pptx",
+          ".pdf"
+        ],
+        "receipts": [
+          {
+            "id": "content-audit",
+            "label": "内容与事实门禁",
+            "producerTools": ["gongchuang_content_audit"]
+          },
+          {
+            "id": "visual-inspection",
+            "label": "真实渲染视觉验收",
+            "producerTools": ["gongchuang_visual_inspection"]
+          },
+          {
+            "id": "brand-watermark",
+            "label": "文档标识检查",
+            "producerTools": ["gongchuang_branding_gate"]
+          },
+          {
+            "id": "artifact-openability",
+            "label": "交付物可打开性验收",
+            "producerTools": ["gongchuang_artifact_probe"]
+          }
+        ]
+      }
+    ]
+  }
+}

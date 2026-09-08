@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-15-gongchuang-focused-sidebar-and-desktop-settings.md
+2026-08-15-gongchuang-focused-sidebar-and-desktop-settings.md: 486d27dd75e1301b5f034c10cbb92c8eb3cf7433
+2026-08-15-gongchuang-focused-sidebar-and-desktop-settings.zh.md: 186a768b6df1a7fc578b78f16d7b59f651b9a82c

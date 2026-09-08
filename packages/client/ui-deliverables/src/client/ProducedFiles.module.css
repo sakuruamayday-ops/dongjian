@@ -1,0 +1,28 @@
+/* Full file names remain available on narrow windows; extra files expand in place. */
+.root { display: grid; gap: 8px; margin-top: 16px; min-width: 0; font-size: 13px; line-height: 22px; }
+.label { color: var(--dsw-alias-label-tertiary); }
+.lane { display: grid; gap: 8px; min-width: 0; }
+.row { display: grid; gap: 8px; min-width: 0; }
+.more, .showFolder {
+  justify-self: start;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 2px 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+  font: inherit;
+  cursor: pointer;
+}
+.fileIcon { flex: none; width: 1.1em; height: 1.1em; }
+.more:hover, .showFolder:hover { text-decoration: underline; }
+.more:focus-visible, .showFolder:focus-visible { outline: 2px solid var(--dsw-alias-border-l3); outline-offset: 2px; }
+.diagnostics { font-size: 12px; color: var(--dsw-alias-label-secondary); overflow-wrap: anywhere; }
+.draft { min-width: 0; margin-top: 20px; padding-top: 16px; border-top: 0.5px solid var(--dsw-alias-border-l3); overflow-wrap: anywhere; }
+.draftHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+.draftWarning { margin: 8px 0; color: var(--dsw-alias-label-secondary); font-size: 13px; line-height: 1.6; }
+.copyDraft { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: 0 0 32px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--dsw-alias-label-secondary); cursor: pointer; }
+.copyDraft:hover { background: var(--dsw-alias-bg-secondary); }
+.copyDraft:focus-visible { outline: 2px solid var(--dsw-alias-border-l3); outline-offset: 2px; }

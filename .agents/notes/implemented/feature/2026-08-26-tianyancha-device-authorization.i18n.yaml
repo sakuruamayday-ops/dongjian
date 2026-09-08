@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-26-tianyancha-device-authorization.md
+2026-08-26-tianyancha-device-authorization.md: e199b884f2cd4199668eb31f6a9a8c78a5e9b5e9
+2026-08-26-tianyancha-device-authorization.zh.md: 55044205b098c234f8b6552e11d7a37816825dfc

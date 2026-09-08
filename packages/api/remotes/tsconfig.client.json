@@ -1,0 +1,101 @@
+{
+  "extends": "../../../tsconfig.base.client.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/tsconfig.client.tsbuildinfo"
+  },
+  "files": [
+    "src/client/index.ts",
+    "src/client/gongchuang-contributions.ts",
+    "src/remote-events.ts",
+    "src/types.ts"
+  ],
+  "references": [
+    {
+      "path": "../../../vendor/cordis"
+    },
+    {
+      "path": "../gateway/tsconfig.client.json"
+    },
+    {
+      "path": "../../client/connection/tsconfig.client.json"
+    },
+    {
+      "path": "../../client/file-upload/tsconfig.client.json"
+    },
+    {
+      "path": "../../credentials/credentials"
+
+    },
+    {
+      "path": "../../context/file-reference"
+    },
+    {
+      "path": "../../context/session-reference"
+    },
+    {
+      "path": "../../extensions/cordis-host-runner"
+    },
+    {
+      "path": "../../goal/goal"
+    },
+    {
+      "path": "../../feedback/message-feedback"
+    },
+    {
+      "path": "../../mcp/gongchuang-connectors"
+    },
+    {
+      "path": "../../skill/gongchuang-skill-marketplace"
+    },
+    {
+      "path": "../../product/gongchuang-local-automation"
+    },
+    {
+      "path": "../../product/gongchuang-graph-memory"
+    },
+    {
+      "path": "../../product/gongchuang-account"
+    },
+    {
+      "path": "../../product/gongchuang-model-connections"
+    },
+    {
+      "path": "../../host/plugin-inventory"
+    },
+    {
+      "path": "../../interaction/commands"
+    },
+    {
+      "path": "../../llm/llm"
+    },
+    {
+      "path": "../../preset/agent-presets"
+    },
+    {
+      "path": "../../settings/settings"
+    },
+    {
+      "path": "../../subagent/subagent"
+    },
+    {
+      "path": "../../interaction/user-approval"
+    },
+    {
+      "path": "../../interaction/user-questions"
+    },
+    {
+      "path": "../session-controller/tsconfig.client.json"
+    },
+    {
+      "path": "../settings-controller"
+    },
+    {
+      "path": "../workspace-controller/tsconfig.client.json"
+    },
+    {
+      "path": "../../typert/protocol"
+    }
+  ]
+}

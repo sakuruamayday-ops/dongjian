@@ -1,0 +1,13 @@
+# Context-pressure composition for recording the skill-prune recovery path.
+
+- id: compaction-basic
+  name: '@deepseek-ai/dsh-compaction-basic'
+  config:
+    thresholdRatio: 0.9
+
+- id: tool-result-pruner
+  name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+  config:
+    thresholdChars: 2000
+    headChars: 1000
+    tailChars: 300

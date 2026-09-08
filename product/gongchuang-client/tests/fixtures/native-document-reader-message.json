@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "GC-QA-MIXED-PDF-B08。请读取本轮上传的混合 PDF，按页列出实际读到的标记和算式，并说明是否还有未读取的内容。只处理这个合成附件，不做企业或政策分析，不生成新的交付文件，不删除任何文件。\n\n本次任务可读取以下企业工作区文件：\n- `导入资料/GC-QA-mixed-text-scan (7).pdf`\n\n文档读取：需要读取 Office、PDF 或 WPS 附件时，先加载 project-application-assistant 技能，只执行其中“企业资料导入与读取”，再调用现成的 gongchuang_skill_operation，operation 为 project-application-assistant.extract-workspace-document，parameters.document 为上面的实际相对路径字符串。按当前工具目录通过 tools 调用；不要重新编写解析脚本或探测安装目录。保留已提取正文，仅对返回的 ocr_pages 补充 OCR。此读取指引不启动首次配置、企业分析或报告任务。"
+    }
+  ],
+  "source": {
+    "kind": "user",
+    "displayText": "@\"导入资料/GC-QA-mixed-text-scan (7).pdf\"\nGC-QA-MIXED-PDF-B08。请读取本轮上传的混合 PDF，按页列出实际读到的标记和算式，并说明是否还有未读取的内容。只处理这个合成附件，不做企业或政策分析，不生成新的交付文件，不删除任何文件。"
+  }
+}

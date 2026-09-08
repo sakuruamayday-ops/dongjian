@@ -1,0 +1,30 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "lib/types"
+  },
+  "include": ["src", "tests"],
+  "references": [
+    { "path": "../../vendor/cordis" },
+    { "path": "../../vendor/include" },
+    { "path": "../../vendor/loader" },
+    { "path": "../../packages/boot/app-boot" },
+    { "path": "../../packages/code-runtime/code-runtime" },
+    { "path": "../../packages/core/agent" },
+    { "path": "../../packages/core/session" },
+    { "path": "../../packages/core/system-prompt" },
+    { "path": "../../packages/core/tools" },
+    { "path": "../../packages/credentials/gongchuang-keychain" },
+    { "path": "../../packages/guard/gongchuang-policy-gate" },
+    { "path": "../../packages/llm/llm" },
+    { "path": "../../packages/llm/llm-deepseek" },
+    { "path": "../../packages/llm/llm-pi-ai" },
+    { "path": "../../packages/product/gongchuang-account" },
+    { "path": "../../packages/product/gongchuang-model-connections" },
+    { "path": "../../packages/product/gongchuang-signed-skill-runtime" },
+    { "path": "../../packages/settings/settings" },
+    { "path": "../../packages/skill/skill" },
+    { "path": "../../packages/util/launch-environment" }
+  ]
+}

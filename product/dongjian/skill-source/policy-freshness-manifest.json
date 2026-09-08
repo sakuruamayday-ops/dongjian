@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "as_of_timezone": "Asia/Shanghai",
+  "records": [
+    {
+      "id": "sme-current-policy-2026",
+      "path": "sme-development-projects/references/current-policy-baseline-2026.md",
+      "verified_at": "2026-08-02",
+      "effective_from": "2026-01-01",
+      "effective_until": null,
+      "next_review_at": "2026-09-30",
+      "source_locator": "工信部企业〔2026〕2号及工信厅企业函〔2026〕117号；2026新申报执行新办法，2026指定复核对象执行当期通知的过渡要求，活动技能不包含历史评分引擎",
+      "source_sha256": "e9b865b21abef878be74e69ea90d57f71a621e8aa60ff65b1525ad0badb56cce",
+      "block_after_next_review": true
+    },
+    {
+      "id": "hangzhou-zhejiang-rd-platform-2026",
+      "path": "technology-innovation-projects/references/current-rd-platform-baseline-2026.md",
+      "verified_at": "2026-09-02",
+      "effective_from": "2026-05-29",
+      "effective_until": null,
+      "next_review_at": "2026-09-30",
+      "source_locator": "2026-09-02复核杭州科技局、杭州政府公报和杭州市政府域名；杭科高〔2022〕39号有效至2027-12-31，杭州市企业研究院正式办法当前检索层未命中，2026年征求意见稿继续按draft使用；浙江省执行浙经信高新〔2025〕169号",
+      "source_sha256": "a006640da35bbf5c78f810cb73b7e4e0c7a8582397a1f4f06797bca3f1ce0b67",
+      "block_after_next_review": true
+    },
+    {
+      "id": "manufacturing-tax-policy-baseline",
+      "path": "manufacturing-tax-risk-analysis/references/policy-baseline.md",
+      "verified_at": "2026-07-24",
+      "effective_from": "2026-01-01",
+      "effective_until": null,
+      "next_review_at": "2026-10-31",
+      "source_locator": "国家税务总局、财政部及现行税收法规本地来源清单",
+      "source_sha256": "d720040d94048479f7e4d9b9b75b1598ca5231cfe8f03e0beb1575809602104f",
+      "block_after_next_review": true
+    },
+    {
+      "id": "company-law-compliance-2026",
+      "path": "legal-regulations/references/company-law-compliance-2026.md",
+      "verified_at": "2026-07-21",
+      "effective_from": "2024-07-01",
+      "effective_until": null,
+      "next_review_at": "2026-10-21",
+      "source_locator": "现行公司法及配套规定本地核验清单",
+      "source_sha256": "7a93fec392790216b444a6e2d583b518eef346c54c58c5b7636275917afd0342",
+      "block_after_next_review": true
+    },
+    {
+      "id": "canonical-project-index",
+      "path": "project-matching/references/canonical-project-index.jsonl",
+      "verified_at": "2026-07-24",
+      "effective_from": "2026-07-24",
+      "effective_until": null,
+      "next_review_at": "2026-10-31",
+      "source_locator": "项目地图与高频项目规则合并生成的规范项目索引",
+      "source_sha256": "368f67de07094d16d10b3e92e4ba50c70c86c058b603762c43f4655867ff4b99",
+      "block_after_next_review": true
+    },
+    {
+      "id": "high-frequency-retrieval-rules",
+      "path": "project-matching/references/high-frequency-project-retrieval-rules.json",
+      "verified_at": "2026-09-02",
+      "effective_from": "2026-07-24",
+      "effective_until": null,
+      "next_review_at": "2026-09-30",
+      "source_locator": "2026-09-02复核27条高频项目简称、地区选择、标题允许与排除规则；该文件只承担检索路由，不承载当期政策资格结论",
+      "source_sha256": "7748832c135f838e103d6176260e003d020602ffc05e72a6483a0ef68d599097",
+      "block_after_next_review": true
+    },
+    {
+      "id": "high-frequency-policy-rules",
+      "path": "project-matching/references/high-frequency-project-rules.jsonl",
+      "verified_at": "2026-09-02",
+      "effective_from": "2026-07-24",
+      "effective_until": null,
+      "next_review_at": "2026-09-30",
+      "source_locator": "2026-09-02复核308条高频规则：303条historical-reference、4条current、1条draft-not-effective，全部要求正式使用前回到官方原文核验；现行与草案状态已按工信部、省经信厅及杭州官方域名复核",
+      "source_sha256": "6c881ff2911e171d9e7d3ec56bf0f1204bc0160048bfb7dfc54f9bcad9427f45",
+      "block_after_next_review": true
+    },
+    {
+      "id": "project-map",
+      "path": "project-matching/references/project-map.jsonl",
+      "verified_at": "2026-07-24",
+      "effective_from": "2026-07-24",
+      "effective_until": null,
+      "next_review_at": "2026-10-31",
+      "source_locator": "政府项目分类地图本地快照",
+      "source_sha256": "f912bd0ef840a67f31b88cde0288e1c5d5863e28a069a969f078b9ef9c42b909",
+      "block_after_next_review": true
+    }
+  ]
+}

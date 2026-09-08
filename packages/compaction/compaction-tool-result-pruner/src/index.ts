@@ -1,0 +1,300 @@
+/**
+ * Replay-safe, model-free tool-result pruning service.
+ *
+ * @module @deepseek-ai/dsh-compaction-tool-result-pruner
+ */
+
+import { Context, Service } from '@deepseek-ai/cordis'
+import z from '@deepseek-ai/schemastery'
+import { freezeMessage } from '@deepseek-ai/dsh-llm'
+import type { ContentBlock } from '@deepseek-ai/dsh-llm'
+import type { Session, SessionEvent, SessionSeq, ToolResultMessage } from '@deepseek-ai/dsh-session'
+// Type-only: the `compaction/*` SessionEventMap merges (the shadow-price event).
+import type {} from '@deepseek-ai/dsh-compaction'
+// Type-only: the `ctx.tokenMeter` Context merge for the declared injection.
+import type {} from '@deepseek-ai/dsh-token-meter'
+import { codePointLength, DEFAULTS, PRUNE_MARKER, resolveConfig } from './config.ts'
+import type {
+  PrunedEntry,
+  PruneResult,
+  ResolvedConfig,
+  ToolResultPruneConfig,
+} from './types.ts'
+
+export { codePointLength, DEFAULTS, PRUNE_MARKER, resolveConfig } from './config.ts'
+export type {
+  PrunedEntry,
+  PruneResult,
+  ResolvedConfig,
+  ToolResultPruneConfig,
+} from './types.ts'
+
+declare module '@deepseek-ai/cordis' {
+  interface Context {
+    toolResultPruner: ToolResultPruner
+  }
+}
+
+interface SnapshotCandidate {
+  readonly seq: SessionSeq
+  readonly event: SessionEvent<'tool/result'>
+  readonly skillName?: string
+}
+
+const SKILL_PRUNE_MARKER = '<skill-result-pruned reload="'
+
+/** Render the one-shot recovery notice for a pruned `skill` tool result. */
+function skillPruneMarker(skillName: string, reloadAvailable: boolean): string {
+  const quotedName = JSON.stringify(skillName)
+  return reloadAvailable
+    ? [
+      '',
+      '',
+      '<skill-result-pruned reload="available">',
+      `The instructions for skill ${quotedName} are incomplete. If the omitted part is needed, call the \`skill\` tool once more with {"name":${quotedName}} to reload the full instructions before continuing. Do not reload automatically or more than once because of this marker.`,
+      '</skill-result-pruned>',
+      '',
+      '',
+    ].join('\n')
+    : [
+      '',
+      '',
+      '<skill-result-pruned reload="used">',
+      `The instructions for skill ${quotedName} remain incomplete after the one reload notice. Continue with the retained instructions; do not call the \`skill\` tool again solely because of this marker.`,
+      '</skill-result-pruned>',
+      '',
+      '',
+    ].join('\n')
+}
+
+/** Resolve the exact `skill` name from the logged call paired with one result. */
+function pairedSkillName(session: Session, result: SessionEvent<'tool/result'>): string | undefined {
+  if (result.data.message.content[0].isError === true) return undefined
+  const callId = result.data.message.source.callId
+  const call = session.snapshotEvents().findLast(event => event.seq < result.seq
+    && event.type === 'tool/call'
+    && event.data.turn === result.data.turn
+    && event.data.step === result.data.step
+    && event.data.callId === callId)
+  if (call?.type !== 'tool/call' || call.data.name !== 'skill') return undefined
+  try {
+    const args: unknown = JSON.parse(call.data.arguments)
+    if (args === null || typeof args !== 'object' || Array.isArray(args)) return undefined
+    const name = (args as Record<string, unknown>)['name']
+    if (typeof name !== 'string' || name.length === 0) return undefined
+    const content = result.data.message.content[0].content
+    const text = content[0]?.type === 'text' ? content[0].text : undefined
+    return content.length === 1
+      && text !== undefined
+      && (text.startsWith(`<skill_content name="${name}">`) || text.includes(SKILL_PRUNE_MARKER))
+      ? name
+      : undefined
+  } catch {
+    return undefined
+  }
+}
+
+/** Return skill names whose latest human turn already received a reload offer. */
+function activeSkillReloadOffers(session: Session): Set<string> {
+  const events = session.snapshotEvents()
+  const lastHumanInputSeq = events.findLast(event => event.type === 'user/message'
+    && event.data.source.kind === 'user')?.seq ?? -1
+  const names = new Set<string>()
+  for (const event of events) {
+    if (event.seq <= lastHumanInputSeq || event.type !== 'tool/result') continue
+    if (event.surfaceOp === undefined || typeof event.surfaceOp === 'string') continue
+    const text = event.data.message.content[0].content
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('')
+    if (!text.includes(`${SKILL_PRUNE_MARKER}available">`)) continue
+    const name = pairedSkillName(session, event)
+    if (name !== undefined) names.add(name)
+  }
+  return names
+}
+
+/** Deterministic head/middle/tail pruning for current tool-result surface nodes. */
+export class ToolResultPruner extends Service {
+  // The token meter prices each shadowed node for its logged shadow-price
+  // event, so pruning genuinely requires the pricing capability.
+  static inject = ['tokenMeter']
+
+  static Config: z<ToolResultPruneConfig> = z.object({
+    thresholdChars: z.number().step(1).min(1).default(DEFAULTS.thresholdChars),
+    headChars: z.number().step(1).min(0).default(DEFAULTS.headChars),
+    tailChars: z.number().step(1).min(0).default(DEFAULTS.tailChars),
+  })
+
+  /** Resolved and immutable character budgets. */
+  readonly config: ResolvedConfig
+
+  constructor(ctx: Context, config: ToolResultPruneConfig = {}) {
+    super(ctx, 'toolResultPruner')
+    this.config = resolveConfig(config)
+  }
+
+  /**
+   * Measure text content in Unicode code points; non-text blocks cost zero.
+   * @param blocks - tool-result content to measure.
+   * @returns total Unicode code points across text blocks.
+   */
+  measureContent(blocks: readonly ContentBlock[]): number {
+    let chars = 0
+    for (const block of blocks) {
+      if (block.type === 'text') chars += codePointLength(block.text)
+    }
+    return chars
+  }
+
+  /**
+   * Replace an over-budget text middle while retaining rich-block order.
+   * Text slicing is by Unicode code point, not UTF-16 code unit, so a retained
+   * boundary cannot split a surrogate pair. Grapheme clusters may still split.
+   * @param blocks - original tool-result content.
+   * @returns pruned content, or `null` when the text is within budget.
+   */
+  pruneContent(blocks: readonly ContentBlock[]): ContentBlock[] | null {
+    return this.pruneContentWithMarker(blocks, PRUNE_MARKER)
+  }
+
+  /** Apply one selected marker while preserving the configured tail before reducing the head. */
+  private pruneContentWithMarker(blocks: readonly ContentBlock[], markerText: string): ContentBlock[] | null {
+    const totalChars = this.measureContent(blocks)
+    if (totalChars <= this.config.thresholdChars) return null
+
+    const markerChars = codePointLength(markerText)
+    const retainedBudget = this.config.thresholdChars - markerChars
+    // A deployment can configure a threshold smaller than the recovery notice.
+    // Preserve the validated generic marker rather than emitting an oversized result.
+    const marker = retainedBudget < 0 ? PRUNE_MARKER : markerText
+    const availableChars = retainedBudget < 0
+      ? this.config.thresholdChars - codePointLength(PRUNE_MARKER)
+      : retainedBudget
+    const tailChars = Math.min(this.config.tailChars, availableChars)
+    const headChars = Math.min(this.config.headChars, availableChars - tailChars)
+    const removedStart = headChars
+    const removedEnd = totalChars - tailChars
+    const pruned: ContentBlock[] = []
+    let consumed = 0
+    let markerInserted = false
+
+    for (const block of blocks) {
+      if (block.type !== 'text') {
+        pruned.push(block)
+        continue
+      }
+
+      const points = Array.from(block.text)
+      const blockStart = consumed
+      const blockEnd = blockStart + points.length
+      const headEnd = Math.min(points.length, Math.max(0, removedStart - blockStart))
+      const tailStart = Math.min(points.length, Math.max(0, removedEnd - blockStart))
+      const intersectsRemoved = blockStart < removedEnd && blockEnd > removedStart
+      const insertedMarker = intersectsRemoved && !markerInserted ? marker : ''
+      if (insertedMarker.length > 0) markerInserted = true
+      const text = points.slice(0, headEnd).join('')
+        + insertedMarker
+        + points.slice(tailStart).join('')
+      if (text.length > 0) pruned.push({ ...block, text })
+      consumed = blockEnd
+    }
+
+    /* v8 ignore next -- totalChars > threshold and valid budgets guarantee a removed text span. */
+    if (!markerInserted) throw new Error('tool-result prune: failed to locate the removed text span')
+    const charsAfter = this.measureContent(pruned)
+    /* v8 ignore next -- config validation fixes the emitted head + marker + tail budget. */
+    if (charsAfter > this.config.thresholdChars || charsAfter >= totalChars) {
+      throw new Error('tool-result prune: replacement must be smaller and within threshold')
+    }
+    return pruned
+  }
+
+  /**
+   * Prune every over-budget tool result from one stable current-surface snapshot.
+   * Each replacement preserves the complete event data except for `content`,
+   * cites the shadowed node so replay can recover the replacement input, and is
+   * immediately preceded by a `compaction/prune` shadow-price event pricing the
+   * shadowed node through the injected token meter, so pure consumers can
+   * subtract it without per-node state.
+   * @param session - session whose current surface is rewritten.
+   * @returns landed replacements and aggregate Unicode-code-point savings.
+   * @throws when the session rejects a replacement; replacements committed
+   * earlier in the pass remain durable.
+   */
+  pruneSession(session: Session): PruneResult {
+    const candidates: SnapshotCandidate[] = []
+    for (const seq of [...session.surface.nodes]) {
+      const event = session.eventAt(seq)
+      /* v8 ignore next -- surface seqs are validated contiguous log references. */
+      if (event?.type === 'tool/result') {
+        const skillName = pairedSkillName(session, event)
+        candidates.push({ seq, event, ...skillName === undefined ? {} : { skillName } })
+      }
+    }
+
+    // When several long loads of one skill are already present, only the latest
+    // result offers a reload. A later compaction in the same human turn sees the
+    // durable offer and changes the notice to `used`, preventing a reload loop.
+    const latestLongSkillResult = new Map<string, number>()
+    for (const { seq, event, skillName } of candidates) {
+      if (skillName !== undefined
+        && this.measureContent(event.data.message.content[0].content) > this.config.thresholdChars) {
+        latestLongSkillResult.set(skillName, seq)
+      }
+    }
+    const offeredSkills = activeSkillReloadOffers(session)
+
+    const pruned: PrunedEntry[] = []
+    let charsRemoved = 0
+    for (const { seq, event, skillName } of candidates) {
+      const result = event.data.message.content[0]
+      const reloadAvailable = skillName !== undefined
+        && latestLongSkillResult.get(skillName) === seq
+        && !offeredSkills.has(skillName)
+      const marker = skillName === undefined || latestLongSkillResult.get(skillName) !== seq
+        ? PRUNE_MARKER
+        : skillPruneMarker(skillName, reloadAvailable)
+      const content = this.pruneContentWithMarker(result.content, marker)
+      if (content === null) continue
+      if (reloadAvailable && codePointLength(marker) <= this.config.thresholdChars) {
+        offeredSkills.add(skillName)
+      }
+      const charsBefore = this.measureContent(result.content)
+      const charsAfter = this.measureContent(content)
+      const message = freezeMessage<ToolResultMessage>({
+        ...event.data.message,
+        content: [{
+          ...result,
+          content,
+        }] as [typeof result],
+      })
+      // Shadow-price protocol: the metering event and its replacement are
+      // appended synchronously adjacent, so pure consumers subtract the
+      // shadowed node's heuristic price without retaining per-node state.
+      session.append('compaction/prune', {
+        shadowedRange: { start: seq, end: seq },
+        shadowedSeqs: [seq],
+        shadowedTokenCount: this.ctx.tokenMeter.estimateMessage(event.data.message),
+      })
+      const replacement = session.append('tool/result', {
+        ...event.data,
+        message,
+      }, {
+        surfaceOp: { op: 'replace', start: seq, end: seq },
+        sourceEventSeqs: [seq],
+      })
+      pruned.push({
+        originalSeq: seq,
+        replacementSeq: replacement.seq,
+        callId: event.data.message.source.callId,
+        charsBefore,
+        charsAfter,
+      })
+      charsRemoved += charsBefore - charsAfter
+    }
+    return { pruned, charsRemoved }
+  }
+}
+
+export default ToolResultPruner

@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/proposed/bug-fix/2026-09-04-composer-payload-placement.md
+2026-09-04-composer-payload-placement.md: 4e6e6c400b0cd851665a2557e21f55ae76307159
+2026-09-04-composer-payload-placement.zh.md: 878e563d9dd525948ca4076bd609b3f7f45f2016

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "productId": "cn.dongjian.desktop",
+  "displayName": "洞见",
+  "organizationName": "Dongjian",
+  "slogan": "",
+  "client": {
+    "displayVersion": "V0.1.0",
+    "semver": "0.1.0",
+    "status": "development",
+    "releaseChannels": ["windows", "macos"]
+  },
+  "sourceClient": {
+    "clientVersion": "0.4.7",
+    "skillBundleVersion": "1.6.19",
+    "upstreamCommit": "d347e703908d0406b7a7ef80e3a0e594d86b2215",
+    "sourceCommit": "70c732c813ade57958b7637bfc6a5539d9d132bf"
+  },
+  "bundledSkillSuite": {
+    "displayVersion": "V0.1.0",
+    "semver": "0.1.0",
+    "relationship": "bundled-compatible-content"
+  },
+  "upstream": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness",
+    "ref": "dsh-v0.1.3-alpha.1",
+    "commit": "d347e703908d0406b7a7ef80e3a0e594d86b2215"
+  },
+  "productPolicy": {
+    "generalAssistant": true,
+    "professionalTemplates": "default-and-user-editable",
+    "skillSources": ["bundled", "marketplace", "user", "workspace"],
+    "account": "none",
+    "modelCredentials": "user-configured",
+    "knowledgeAccess": "independent-mcp-credentials",
+    "longTermMemory": "local-personal-and-enterprise-partitioned"
+  },
+  "releaseRequirements": {
+    "macos": [
+      "adhoc-code-integrity",
+      "server-ed25519-release-manifest",
+      "embedded-runtime-and-skill-signatures",
+      "first-install-gatekeeper-open-anyway-ui-guidance",
+      "clean-device-install-update-relaunch",
+      "transactional-current-install-recovery"
+    ],
+    "windows": [
+      "explicit-unsigned-risk-disclosure",
+      "sha256-artifact-integrity",
+      "embedded-runtime-and-skill-signatures",
+      "cross-platform-static-validation"
+    ]
+  }
+}

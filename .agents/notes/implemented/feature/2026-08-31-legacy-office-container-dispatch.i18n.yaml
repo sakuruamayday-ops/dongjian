@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-31-legacy-office-container-dispatch.md
+2026-08-31-legacy-office-container-dispatch.md: 8e5ac358134ae286085f9bbd92c59179d9f2102c
+2026-08-31-legacy-office-container-dispatch.zh.md: 19444e6774799d72d966702c097eec16aa7e66ce

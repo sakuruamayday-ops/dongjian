@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "pythonVersion": "3.13",
+  "targets": {
+    "darwin-x64": {
+      "pipPlatform": "macosx_10_15_x86_64",
+      "abis": ["cp313", "abi3"],
+      "artifacts": [
+        {
+          "distribution": "python-docx",
+          "version": "1.2.0",
+          "filename": "python_docx-1.2.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d0/00/1e03a4989fa5795da308cd774f05b704ace555a70f9bf9d3be057b680bcf/python_docx-1.2.0-py3-none-any.whl",
+          "sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["docx", "python_docx-1.2.0.dist-info"]
+        },
+        {
+          "distribution": "lxml",
+          "version": "6.1.1",
+          "filename": "lxml-6.1.1-cp313-cp313-macosx_10_13_universal2.whl",
+          "url": "https://files.pythonhosted.org/packages/a5/eb/7e6f37c5584ccbb2ff267f56fd0339016938c1c8684cfefab9b33ffc2f36/lxml-6.1.1-cp313-cp313-macosx_10_13_universal2.whl",
+          "sha256": "68a9198d0fc122d14bb76837de9aa80cf84caed990b5b237f532ed87d3706736",
+          "wheelTag": "cp313-cp313-macosx_10_13_universal2",
+          "topLevel": ["lxml", "lxml-6.1.1.dist-info"]
+        },
+        {
+          "distribution": "PyMuPDF",
+          "version": "1.28.2",
+          "filename": "pymupdf-1.28.2-cp310-abi3-macosx_10_15_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/b4/51/550c9a75c4ff3245cb4ecb7bb95cbe2ab7374230b8e2b7a1f7259444150b/pymupdf-1.28.2-cp310-abi3-macosx_10_15_x86_64.whl",
+          "sha256": "5fc315b425ff1f7afdd1ea2f348205cb19b806767daae7ce4d64115799c2bae1",
+          "wheelTag": "cp310-abi3-macosx_10_15_x86_64",
+          "topLevel": ["fitz", "pymupdf", "pymupdf-1.28.2.dist-info"]
+        },
+        {
+          "distribution": "openpyxl",
+          "version": "3.1.5",
+          "filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
+          "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["openpyxl", "openpyxl-3.1.5.dist-info"]
+        },
+        {
+          "distribution": "xlrd",
+          "version": "2.0.2",
+          "filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/1a/62/c8d562e7766786ba6587d09c5a8ba9f718ed3fa8af7f4553e8f91c36f302/xlrd-2.0.2-py2.py3-none-any.whl",
+          "sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlrd", "xlrd-2.0.2.dist-info"]
+        },
+        {
+          "distribution": "et-xmlfile",
+          "version": "2.0.0",
+          "filename": "et_xmlfile-2.0.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl",
+          "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["et_xmlfile", "et_xmlfile-2.0.0.dist-info"]
+        },
+        {
+          "distribution": "python-pptx",
+          "version": "1.0.2",
+          "filename": "python_pptx-1.0.2-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d9/4f/00be2196329ebbff56ce564aa94efb0fbc828d00de250b1980de1a34ab49/python_pptx-1.0.2-py3-none-any.whl",
+          "sha256": "160838e0b8565a8b1f67947675886e9fea18aa5e795db7ae531606d68e785cba",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["pptx", "python_pptx-1.0.2.dist-info"],
+          "licenseFiles": ["python_pptx-1.0.2.dist-info/LICENSE"]
+        },
+        {
+          "distribution": "Pillow",
+          "version": "12.3.0",
+          "filename": "pillow-12.3.0-cp313-cp313-macosx_10_13_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/42/92/2fc3ffad878ae8dd5469ec1bc8eb83b71f48e13efdf68f02709003982a32/pillow-12.3.0-cp313-cp313-macosx_10_13_x86_64.whl",
+          "sha256": "7a743ff716f746fc19a9557f60dab1600d4613255f8a7aeb3cdde4db7eb15a66",
+          "wheelTag": "cp313-cp313-macosx_10_13_x86_64",
+          "topLevel": ["PIL", "pillow-12.3.0.dist-info"],
+          "licenseFiles": ["pillow-12.3.0.dist-info/licenses/LICENSE"]
+        },
+        {
+          "distribution": "XlsxWriter",
+          "version": "3.2.5",
+          "filename": "xlsxwriter-3.2.5-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/fa/34/a22e6664211f0c8879521328000bdcae9bf6dbafa94a923e531f6d5b3f73/xlsxwriter-3.2.5-py3-none-any.whl",
+          "sha256": "4f4824234e1eaf9d95df9a8fe974585ff91d0f5e3d3f12ace5b71e443c1c6abd",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlsxwriter", "xlsxwriter-3.2.5.dist-info"],
+          "licenseFiles": ["xlsxwriter-3.2.5.dist-info/LICENSE.txt"]
+        }
+      ]
+    },
+    "darwin-arm64": {
+      "pipPlatform": "macosx_11_0_arm64",
+      "abis": ["cp313", "abi3"],
+      "artifacts": [
+        {
+          "distribution": "python-docx",
+          "version": "1.2.0",
+          "filename": "python_docx-1.2.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d0/00/1e03a4989fa5795da308cd774f05b704ace555a70f9bf9d3be057b680bcf/python_docx-1.2.0-py3-none-any.whl",
+          "sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["docx", "python_docx-1.2.0.dist-info"]
+        },
+        {
+          "distribution": "lxml",
+          "version": "6.1.1",
+          "filename": "lxml-6.1.1-cp313-cp313-macosx_10_13_universal2.whl",
+          "url": "https://files.pythonhosted.org/packages/a5/eb/7e6f37c5584ccbb2ff267f56fd0339016938c1c8684cfefab9b33ffc2f36/lxml-6.1.1-cp313-cp313-macosx_10_13_universal2.whl",
+          "sha256": "68a9198d0fc122d14bb76837de9aa80cf84caed990b5b237f532ed87d3706736",
+          "wheelTag": "cp313-cp313-macosx_10_13_universal2",
+          "topLevel": ["lxml", "lxml-6.1.1.dist-info"]
+        },
+        {
+          "distribution": "PyMuPDF",
+          "version": "1.28.2",
+          "filename": "pymupdf-1.28.2-cp310-abi3-macosx_11_0_arm64.whl",
+          "url": "https://files.pythonhosted.org/packages/fa/01/3591f781b417b382a8487a2356e927acfe858b1043bab0ec47f6805bb109/pymupdf-1.28.2-cp310-abi3-macosx_11_0_arm64.whl",
+          "sha256": "7113846b35dbf0a033f088e4f4fb543dabeb4b0b12c112966a1ca1ee2d5eacae",
+          "wheelTag": "cp310-abi3-macosx_11_0_arm64",
+          "topLevel": ["fitz", "pymupdf", "pymupdf-1.28.2.dist-info"]
+        },
+        {
+          "distribution": "openpyxl",
+          "version": "3.1.5",
+          "filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
+          "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["openpyxl", "openpyxl-3.1.5.dist-info"]
+        },
+        {
+          "distribution": "xlrd",
+          "version": "2.0.2",
+          "filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/1a/62/c8d562e7766786ba6587d09c5a8ba9f718ed3fa8af7f4553e8f91c36f302/xlrd-2.0.2-py2.py3-none-any.whl",
+          "sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlrd", "xlrd-2.0.2.dist-info"]
+        },
+        {
+          "distribution": "et-xmlfile",
+          "version": "2.0.0",
+          "filename": "et_xmlfile-2.0.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl",
+          "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["et_xmlfile", "et_xmlfile-2.0.0.dist-info"]
+        },
+        {
+          "distribution": "python-pptx",
+          "version": "1.0.2",
+          "filename": "python_pptx-1.0.2-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d9/4f/00be2196329ebbff56ce564aa94efb0fbc828d00de250b1980de1a34ab49/python_pptx-1.0.2-py3-none-any.whl",
+          "sha256": "160838e0b8565a8b1f67947675886e9fea18aa5e795db7ae531606d68e785cba",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["pptx", "python_pptx-1.0.2.dist-info"],
+          "licenseFiles": ["python_pptx-1.0.2.dist-info/LICENSE"]
+        },
+        {
+          "distribution": "Pillow",
+          "version": "12.3.0",
+          "filename": "pillow-12.3.0-cp313-cp313-macosx_11_0_arm64.whl",
+          "url": "https://files.pythonhosted.org/packages/10/76/8803c13605b763d33d156c4678fc77f8443389c0c51c8aef707bb02015f4/pillow-12.3.0-cp313-cp313-macosx_11_0_arm64.whl",
+          "sha256": "d69141514cc30b774ceea5e3ed3a6635c8d8a96edf664689b890f4089111fb35",
+          "wheelTag": "cp313-cp313-macosx_11_0_arm64",
+          "topLevel": ["PIL", "pillow-12.3.0.dist-info"],
+          "licenseFiles": ["pillow-12.3.0.dist-info/licenses/LICENSE"]
+        },
+        {
+          "distribution": "XlsxWriter",
+          "version": "3.2.5",
+          "filename": "xlsxwriter-3.2.5-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/fa/34/a22e6664211f0c8879521328000bdcae9bf6dbafa94a923e531f6d5b3f73/xlsxwriter-3.2.5-py3-none-any.whl",
+          "sha256": "4f4824234e1eaf9d95df9a8fe974585ff91d0f5e3d3f12ace5b71e443c1c6abd",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlsxwriter", "xlsxwriter-3.2.5.dist-info"],
+          "licenseFiles": ["xlsxwriter-3.2.5.dist-info/LICENSE.txt"]
+        }
+      ]
+    },
+    "win32-x64": {
+      "pipPlatform": "win_amd64",
+      "abis": ["cp313", "abi3"],
+      "artifacts": [
+        {
+          "distribution": "python-docx",
+          "version": "1.2.0",
+          "filename": "python_docx-1.2.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d0/00/1e03a4989fa5795da308cd774f05b704ace555a70f9bf9d3be057b680bcf/python_docx-1.2.0-py3-none-any.whl",
+          "sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["docx", "python_docx-1.2.0.dist-info"]
+        },
+        {
+          "distribution": "lxml",
+          "version": "6.1.1",
+          "filename": "lxml-6.1.1-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/e6/99/f4ffb024f238eec2131aaa09f3278fb6129cf892741bf68e1fc1afb8c100/lxml-6.1.1-cp313-cp313-win_amd64.whl",
+          "sha256": "a10bd2fd62e8ce916ececb342f348f190724a098c1faa056fdfb2a22ad5e8660",
+          "wheelTag": "cp313-cp313-win_amd64",
+          "topLevel": ["lxml", "lxml-6.1.1.dist-info"]
+        },
+        {
+          "distribution": "PyMuPDF",
+          "version": "1.28.2",
+          "filename": "pymupdf-1.28.2-cp310-abi3-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/4a/61/d563bbccba262f9dd6d2d35ccb72593648184d886188efb12d9ce8f34dd6/pymupdf-1.28.2-cp310-abi3-win_amd64.whl",
+          "sha256": "ebd244918798502d7b4504c90410d1711a4d7675a32584ca30f1bab419ecbffe",
+          "wheelTag": "cp310-abi3-win_amd64",
+          "topLevel": ["fitz", "pymupdf", "pymupdf-1.28.2.dist-info"]
+        },
+        {
+          "distribution": "openpyxl",
+          "version": "3.1.5",
+          "filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
+          "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["openpyxl", "openpyxl-3.1.5.dist-info"]
+        },
+        {
+          "distribution": "xlrd",
+          "version": "2.0.2",
+          "filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/1a/62/c8d562e7766786ba6587d09c5a8ba9f718ed3fa8af7f4553e8f91c36f302/xlrd-2.0.2-py2.py3-none-any.whl",
+          "sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlrd", "xlrd-2.0.2.dist-info"]
+        },
+        {
+          "distribution": "et-xmlfile",
+          "version": "2.0.0",
+          "filename": "et_xmlfile-2.0.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl",
+          "sha256": "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["et_xmlfile", "et_xmlfile-2.0.0.dist-info"]
+        },
+        {
+          "distribution": "python-pptx",
+          "version": "1.0.2",
+          "filename": "python_pptx-1.0.2-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d9/4f/00be2196329ebbff56ce564aa94efb0fbc828d00de250b1980de1a34ab49/python_pptx-1.0.2-py3-none-any.whl",
+          "sha256": "160838e0b8565a8b1f67947675886e9fea18aa5e795db7ae531606d68e785cba",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["pptx", "python_pptx-1.0.2.dist-info"],
+          "licenseFiles": ["python_pptx-1.0.2.dist-info/LICENSE"]
+        },
+        {
+          "distribution": "Pillow",
+          "version": "12.3.0",
+          "filename": "pillow-12.3.0-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/a6/9b/7a58e61d62be561da3a356fe2384d4059a6345fc130e23ef1c36a5b81d24/pillow-12.3.0-cp313-cp313-win_amd64.whl",
+          "sha256": "1cca606cd25738df4ed873d5ad46bbdb3d83b5cbca291f6b4ff13a4df6b0bbe8",
+          "wheelTag": "cp313-cp313-win_amd64",
+          "topLevel": ["PIL", "pillow-12.3.0.dist-info"],
+          "licenseFiles": ["pillow-12.3.0.dist-info/licenses/LICENSE"]
+        },
+        {
+          "distribution": "XlsxWriter",
+          "version": "3.2.5",
+          "filename": "xlsxwriter-3.2.5-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/fa/34/a22e6664211f0c8879521328000bdcae9bf6dbafa94a923e531f6d5b3f73/xlsxwriter-3.2.5-py3-none-any.whl",
+          "sha256": "4f4824234e1eaf9d95df9a8fe974585ff91d0f5e3d3f12ace5b71e443c1c6abd",
+          "wheelTag": "py3-none-any",
+          "topLevel": ["xlsxwriter", "xlsxwriter-3.2.5.dist-info"],
+          "licenseFiles": ["xlsxwriter-3.2.5.dist-info/LICENSE.txt"]
+        }
+      ]
+    }
+  }
+}

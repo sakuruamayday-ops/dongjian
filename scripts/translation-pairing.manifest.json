@@ -1,0 +1,24 @@
+{
+  "excluded": [
+    ".agents/notes/AGENTS.md",
+    ".agents/notes/implemented/AGENTS.md",
+    ".agents/notes/implemented/CLAUDE.md",
+    "docs/AGENTS.md",
+    "docs/cordis-api/inherited.md",
+    "docs/i18n/style-samples.md",
+    "docs/i18n/terminology.md",
+    "docs/i18n/translation-prompt.md",
+    "docs/product/共创企业助手-PDF渲染与底座升级设计.md",
+    "docs/product/共创企业助手-产品文档.md",
+    "docs/product/evidence/2026-09-03-functional-review.md",
+    "docs/product/evidence/2026-09-03-numbered-annotations.md",
+    "docs/product/evidence/2026-09-03-v0.4.2-release.md",
+    "docs/product/evidence/2026-09-03-v0.4.3-release.md",
+    "docs/product/evidence/2026-09-03-v0.4.4-release.md",
+    "docs/product/evidence/2026-09-07-review-repairs.md",
+    "docs/product/evidence/2026-09-07-v0.4.5-release.md",
+    "docs/product/evidence/2026-09-07-annotation-renumber.md",
+    "docs/product/evidence/2026-09-07-v0.4.6-release.md",
+    "docs/product/evidence/2026-09-08-model-provider-audit.md"
+  ]
+}

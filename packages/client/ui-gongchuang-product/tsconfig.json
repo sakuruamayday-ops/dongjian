@@ -1,0 +1,29 @@
+{
+  "extends": "../../../tsconfig.base.client.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../product/gongchuang-user-errors" },
+    { "path": "../../product/gongchuang-model-connections" },
+    { "path": "../../util/crypto" },
+    { "path": "../../../vendor/cordis" },
+    { "path": "../../api/remotes/tsconfig.client.json" },
+    { "path": "../../api/session-controller/tsconfig.client.json" },
+    { "path": "../../api/workspace-controller/tsconfig.client.json" },
+    { "path": "../connection/tsconfig.client.json" },
+    { "path": "../locale" },
+    { "path": "../store" },
+    { "path": "../ui-chat" },
+    { "path": "../ui-conversation" },
+    { "path": "../ui-deliverables" },
+    { "path": "../ui-layout" },
+    { "path": "../ui-model-selection" },
+    { "path": "../ui-renderer" },
+    { "path": "../ui-sidebar" },
+    { "path": "../ui-theme" },
+    { "path": "../ui-workspace" }
+  ]
+}

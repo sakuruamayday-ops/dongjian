@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/proposed/bug-fix/2026-09-04-missing-workspace-overlap.md
+2026-09-04-missing-workspace-overlap.md: f607c8f83c07908d3c839282a9cedbc4cdfcbd02
+2026-09-04-missing-workspace-overlap.zh.md: 92ed9d848d742bc27af08f5258547ca63b2e6f6e

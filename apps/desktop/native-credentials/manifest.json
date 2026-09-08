@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "fe9a0af41771e2e844bdb25c08d9e7e895ca851fb0290155512436915fe5a805",
+  "artifacts": {
+    "arm64": {
+      "sha256": "36a71fa751e94ca5124beb7c944fdbae729acc04f6c7957d88c833f4e32f98b4",
+      "cdhash": "2f0a1b5db79824d1115e3bcbc7af8698fc7a6e5a"
+    },
+    "x64": {
+      "sha256": "2b7912b12d7fd1a34f83b0a430ee5ae2a2d97d04e25089515ad8e5955b5b1be1",
+      "cdhash": "54783f86428ac9f8caa3998c69be571dd10955e6"
+    }
+  }
+}

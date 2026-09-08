@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../../vendor/cosmokit" },
+    { "path": "../../../vendor/cordis" },
+    { "path": "../../../vendor/schemastery" },
+    { "path": "../../credentials/credentials" },
+    { "path": "../../product/gongchuang-account" },
+    { "path": "../../product/gongchuang-signed-skill-runtime" },
+    { "path": "../../core/tools" },
+    { "path": "../../llm/llm" },
+    { "path": "../mcp-client" },
+    { "path": "../../settings/settings" },
+    { "path": "../../typert/protocol" },
+    { "path": "../../web/web" }
+  ]
+}

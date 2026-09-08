@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/bug-fix/2026-08-29-skill-prune-one-shot-reload.md
+2026-08-29-skill-prune-one-shot-reload.md: f1b14894a3a38362d9f4e5fa603bb6480c9c5d73
+2026-08-29-skill-prune-one-shot-reload.zh.md: 4a9b63569131bf4551889037f8a08f2db0c7c6b3
