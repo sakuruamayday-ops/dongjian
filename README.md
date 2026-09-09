@@ -6,8 +6,8 @@
 
 <a id="run"></a>
 
-- [Mac Apple Silicon 安装包（DMG）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.0/Dongjian-0.1.0-mac-arm64.dmg)
-- [Mac Apple Silicon 压缩包（ZIP）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.0/Dongjian-0.1.0-mac-arm64.zip)
+- [Mac Apple Silicon 安装包（DMG）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-arm64.dmg)
+- [Mac Apple Silicon 压缩包（ZIP）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-arm64.zip)
 - [查看所有版本](https://github.com/sakuruamayday-ops/dongjian/releases)
 
 ## 模块功能
