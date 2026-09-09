@@ -5,8 +5,8 @@
   "organizationName": "Dongjian",
   "slogan": "",
   "client": {
-    "displayVersion": "V0.1.0",
-    "semver": "0.1.0",
+    "displayVersion": "V0.1.1",
+    "semver": "0.1.1",
     "status": "development",
     "releaseChannels": ["windows", "macos"]
   },

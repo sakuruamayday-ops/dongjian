@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "product": {
     "id": "cn.dongjian.desktop",
-    "clientVersion": "0.1.0",
+    "clientVersion": "0.1.1",
     "skillBundleVersion": "0.1.0"
   },
   "providers": {

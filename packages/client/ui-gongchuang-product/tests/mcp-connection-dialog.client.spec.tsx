@@ -65,13 +65,19 @@ function renderPaddle(
 }
 
 describe('PaddleOCR connection dialog', () => {
-  it('keeps knowledge MCP setup independent of any product login page', () => {
-    renderPaddle(undefined, paddleConnector({ id: 'gongchuang-knowledge', name: '知识库 MCP', officialConfigUrl: '', enabled: false }))
+  it('keeps knowledge MCP setup independent of any product login page', async () => {
+    const { configureMcp } = renderPaddle(undefined, paddleConnector({ id: 'gongchuang-knowledge', name: '知识库 MCP', officialConfigUrl: '', enabled: false }))
     fireEvent.click(screen.getByRole('button', { name: '配置并连接' }))
-    const dialog = screen.getByRole('dialog', { name: '连接知识库 MCP' })
+    const dialog = screen.getByRole('dialog', { name: '连接知识库' })
     expect(within(dialog).queryByRole('link')).toBeNull()
-    expect(within(dialog).getByLabelText('知识库 MCP 地址')).toBeTruthy()
+    expect(within(dialog).getByLabelText('知识库连接地址')).toBeTruthy()
+    expect(within(dialog).getByText('添加微信，连接知识库')).toBeTruthy()
+    expect(within(dialog).getByRole('img', { name: '微信联系二维码' }).getAttribute('src')).toMatch(/^data:image\/jpeg;base64,/u)
     expect(within(dialog).queryByText('登录官方平台')).toBeNull()
+    fireEvent.change(within(dialog).getByLabelText('知识库连接地址'), { target: { value: 'https://knowledge.example/mcp/' } })
+    fireEvent.change(within(dialog).getByLabelText('知识库访问密钥'), { target: { value: 'contact-flow-fixture' } })
+    fireEvent.click(within(dialog).getByRole('button', { name: '连接并验证' }))
+    await waitFor(() => { expect(configureMcp).toHaveBeenCalledWith('gongchuang-knowledge', 'contact-flow-fixture', 'https://knowledge.example/mcp/') })
   })
 
   it('discloses the remote data recipient and requires consent before Host verification', async () => {

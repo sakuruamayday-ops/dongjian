@@ -57,7 +57,7 @@ interface ConnectorSetup {
 /** Fixed connector cards and their official configuration destinations. */
 export const MCP_CARDS: readonly McpCard[] = [
   { id: 'gongchuang-search', name: '联网检索 MCP', description: '统一编排检索、网页读取、来源记录和政策证据链。', status: '内置', url: '' },
-  { id: 'gongchuang-knowledge', name: '知识库 MCP', description: '配置 MCP 地址与访问凭据，检索团队知识库、政策和资料。', status: '需配置', url: '' },
+  { id: 'gongchuang-knowledge', name: '知识库', description: '检索政策、资料与业务知识。添加微信获取知识库接入信息。', status: '需配置', url: '' },
   { id: 'tianyancha', name: '天眼查 MCP', description: '连接天眼查官方 MCP；入口工具负责主体锚定，162 项业务能力按需下钻。', status: '需配置', url: 'https://www.tianyancha.com/ai' },
   { id: 'qcc', name: '企查查 MCP', description: '连接企查查官方核心 MCP 服务，覆盖企业、风险、知识产权、经营、人员、法规、案例、招投标与文档。', status: '需配置', url: 'https://agent.qcc.com' },
   {
