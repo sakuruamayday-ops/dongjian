@@ -6,6 +6,10 @@
 
 <a id="run"></a>
 
+- [Windows 安装包（EXE）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-win-x64.exe)
+- [Windows 压缩包（ZIP）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-win-x64.zip)
+- [Intel Mac 安装包（DMG）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-x64.dmg)
+- [Intel Mac 压缩包（ZIP）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-x64.zip)
 - [Mac Apple Silicon 安装包（DMG）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-arm64.dmg)
 - [Mac Apple Silicon 压缩包（ZIP）](https://github.com/sakuruamayday-ops/dongjian/releases/download/v0.1.1/Dongjian-0.1.1-mac-arm64.zip)
 - [查看所有版本](https://github.com/sakuruamayday-ops/dongjian/releases)
